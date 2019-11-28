@@ -15,36 +15,25 @@ import java.io.Serializable;
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private boolean success;
+    private String code;
 
-    private String errorCode;
-
-    private String errorMsg;
+    private String msg;
 
     private T data;
 
     public Result() {
+        this.code = ResultCode.OK.getCode();
+        this.msg = ResultCode.OK.getDesc();
     }
 
     public Result(T data) {
-        success = true;
+        this.code = ResultCode.OK.getCode();
+        this.msg = ResultCode.OK.getDesc();
         this.data = data;
     }
 
-    public Result(String errorCode, String errorMsg) {
-        success = false;
-        this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "success=" + success +
-                ", errorCode='" + errorCode + '\'' +
-                ", errorMsg='" + errorMsg + '\'' +
-                ", data=" + data +
-                '}';
+    public Result(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 }
